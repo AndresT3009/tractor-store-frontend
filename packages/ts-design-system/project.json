@@ -1,0 +1,36 @@
+{
+  "name": "ts-design-system",
+  "$schema": "../../node_modules/nx/schemas/project-schema.json",
+  "sourceRoot": "packages/ts-design-system/src",
+  "prefix": "ts",
+  "projectType": "library",
+  "tags": ["scope:ts-design-system"],
+  "targets": {
+    "build": {
+      "executor": "@nx/angular:ng-packagr-lite",
+      "outputs": ["{workspaceRoot}/dist/{projectRoot}"],
+      "options": {
+        "project": "packages/ts-design-system/ng-package.json"
+      },
+      "configurations": {
+        "production": {
+          "tsConfig": "packages/ts-design-system/tsconfig.lib.prod.json"
+        },
+        "development": {
+          "tsConfig": "packages/ts-design-system/tsconfig.lib.json"
+        }
+      },
+      "defaultConfiguration": "production"
+    },
+    "test": {
+      "executor": "@nx/jest:jest",
+      "outputs": ["{workspaceRoot}/coverage/{projectRoot}"],
+      "options": {
+        "jestConfig": "packages/ts-design-system/jest.config.ts"
+      }
+    },
+    "lint": {
+      "executor": "@nx/eslint:lint"
+    }
+  }
+}

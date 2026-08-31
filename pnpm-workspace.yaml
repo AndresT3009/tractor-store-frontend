@@ -1,0 +1,14 @@
+packages:
+  - "apps/*"
+  - "packages/*"
+# @parcel/watcher (usado por el watcher de Nx) tiene un script de instalación que hoy crashea con
+# pnpm 11 en Windows ("readStream must be readable", bug de pnpm, no del paquete). Se deja sin
+# aprobar a propósito: Nx cae a polling en su lugar, no bloquea nada. msgpackr-extract es solo un
+# acelerador nativo opcional de lmdb, tampoco crítico.
+allowBuilds:
+  '@parcel/watcher': false
+  '@swc/core': true
+  esbuild: true
+  lmdb: true
+  msgpackr-extract: false
+  nx: true
