@@ -15,9 +15,9 @@ export default [
         {
           enforceBuildableLibDependency: true,
           allow: ['^.*/eslint(\\.base)?\\.config\\.[cm]?js$'],
-          // Fase 3: la shell puede depender de todos; los MFEs pueden depender de
-          // shared-catalog y ts-design-system pero no entre ellos; shared-catalog no depende de
-          // nadie (es la base del grafo).
+          // Fase 3-4: la shell puede depender de todos; los MFEs pueden depender de
+          // shared-catalog, ts-design-system y design-tokens pero no entre ellos; shared-catalog y
+          // design-tokens no dependen de nada (son la base del grafo).
           depConstraints: [
             {
               sourceTag: 'scope:shell',
@@ -25,6 +25,7 @@ export default [
                 'scope:shell',
                 'scope:shared-catalog',
                 'scope:ts-design-system',
+                'scope:design-tokens',
                 'scope:mfe-explore',
                 'scope:mfe-decide',
                 'scope:mfe-checkout',
@@ -36,6 +37,7 @@ export default [
                 'scope:mfe-explore',
                 'scope:shared-catalog',
                 'scope:ts-design-system',
+                'scope:design-tokens',
               ],
             },
             {
@@ -44,6 +46,7 @@ export default [
                 'scope:mfe-decide',
                 'scope:shared-catalog',
                 'scope:ts-design-system',
+                'scope:design-tokens',
               ],
             },
             {
@@ -52,15 +55,24 @@ export default [
                 'scope:mfe-checkout',
                 'scope:shared-catalog',
                 'scope:ts-design-system',
+                'scope:design-tokens',
               ],
             },
             {
               sourceTag: 'scope:ts-design-system',
-              onlyDependOnLibsWithTags: ['scope:ts-design-system', 'scope:shared-catalog'],
+              onlyDependOnLibsWithTags: [
+                'scope:ts-design-system',
+                'scope:shared-catalog',
+                'scope:design-tokens',
+              ],
             },
             {
               sourceTag: 'scope:shared-catalog',
               onlyDependOnLibsWithTags: ['scope:shared-catalog'],
+            },
+            {
+              sourceTag: 'scope:design-tokens',
+              onlyDependOnLibsWithTags: ['scope:design-tokens'],
             },
           ],
         },

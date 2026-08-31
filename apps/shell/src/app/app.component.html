@@ -1,2 +1,19 @@
-<app-nx-welcome></app-nx-welcome>
-<router-outlet></router-outlet>
+<div class="flex min-h-screen flex-col font-sans text-text">
+  <header class="border-b border-border bg-surface px-6 py-4 shadow-sm">
+    <div class="mx-auto flex max-w-6xl items-center justify-between">
+      <span class="text-lg font-semibold text-primary">{{ title }}</span>
+      <nav class="flex items-center gap-6 text-sm text-text-muted">
+        <!-- Fase 3-4: navegación real llega cuando explore/decide/checkout tengan contenido. -->
+        <ts-button data-testid="cart-button">Carrito</ts-button>
+      </nav>
+    </div>
+  </header>
+
+  <main class="mx-auto w-full max-w-6xl flex-1 px-6 py-12">
+    <router-outlet></router-outlet>
+  </main>
+
+  <footer class="border-t border-border bg-surface-muted px-6 py-8 text-sm text-text-muted">
+    <div class="mx-auto max-w-6xl">The Tractor Store</div>
+  </footer>
+</div>

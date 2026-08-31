@@ -1,1 +1,2 @@
-export * from './lib/ts-design-system/ts-design-system.component';
+export * from './lib/ts-button/ts-button.component';
+export * from './lib/elements';

@@ -1,0 +1,24 @@
+/**
+ * Fase 4: capa semántica. Le da significado de uso a los primitivos — es la capa que Tailwind
+ * (tailwind.preset.js) y los componentes de ts-design-system consumen. Cambiar un primitivo (o
+ * remapear qué primitivo usa cada token semántico) no obliga a tocar ningún componente.
+ */
+:root {
+  --color-primary: var(--color-green-600);
+  --color-primary-hover: var(--color-green-700);
+  --color-primary-contrast: var(--color-neutral-0);
+
+  --color-accent: var(--color-amber-500);
+  --color-accent-contrast: var(--color-neutral-900);
+
+  --color-surface: var(--color-neutral-0);
+  --color-surface-muted: var(--color-neutral-50);
+  --color-background: var(--color-neutral-100);
+
+  --color-text: var(--color-neutral-900);
+  --color-text-muted: var(--color-neutral-700);
+  --color-border: var(--color-neutral-300);
+
+  --color-danger: var(--color-red-500);
+  --color-danger-hover: var(--color-red-700);
+}
