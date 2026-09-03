@@ -1,7 +1,5 @@
-/**
- * Fase 4: capa de primitivos. Paleta completa y escalas crudas — nadie las consume directamente
- * fuera de este archivo, solo la capa semántica (semantic.css) las referencia.
- */
+/* Paleta completa y escalas crudas: nadie las consume directamente fuera de este archivo, solo la
+   capa semántica (semantic.css) las referencia. */
 :root {
   /* Verde (marca: maquinaria agrícola) */
   --color-green-50: #eef6ee;

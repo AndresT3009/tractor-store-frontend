@@ -1,10 +1,6 @@
-/**
- * Fase 4: preset de Tailwind compartido en el monorepo. No declara colores/espaciados nuevos —
- * apunta a los mismos custom properties de semantic.css/component.css, así las utilities de
- * Tailwind (bg-primary, text-danger, ...) y el CSS a mano que consume var(--color-primary) nunca se
- * desincronizan entre sí. Cada app lo consume con `presets: [require('../../packages/design-tokens/tailwind.preset.js')]`
- * en su propio tailwind.config.js.
- */
+// No declara colores/espaciados nuevos: apunta a los mismos custom properties de
+// semantic.css/component.css, así las utilities de Tailwind (bg-primary, text-danger, ...) y el
+// CSS a mano que consume var(--color-primary) nunca se desincronizan entre sí.
 module.exports = {
   theme: {
     extend: {

@@ -1,9 +1,5 @@
-/**
- * Fase 4: capa de componente. Tokens que un componente concreto de ts-design-system expone en su
- * propia API de theming (así un consumidor puede sobrescribir --button-bg sin tocar --color-primary
- * global, que afectaría a todo lo demás). Cada nuevo componente del design system suma los suyos
- * aquí a medida que se construye.
- */
+/* Tokens que un componente concreto de ts-design-system expone en su propia API de theming, así
+   un consumidor puede sobrescribir --button-bg sin tocar --color-primary global. */
 :root {
   --button-bg: var(--color-primary);
   --button-bg-hover: var(--color-primary-hover);

@@ -1,18 +1,8 @@
 import { Component, EventEmitter, Input, Output, ViewEncapsulation } from '@angular/core';
 
-/**
- * Fase 4: primer componente real del design system. `ViewEncapsulation.ShadowDom` a propósito —
- * es lo que hace falta para probar que los tokens (CSS Custom Properties) atraviesan la frontera del
- * Shadow DOM cuando este componente se registra como Custom Element (ver `elements.ts`), mientras
- * que un selector CSS normal del documento no llegaría a tocar su `<button>` interno.
- *
- * Sin `ChangeDetectionStrategy.OnPush` a propósito: en este entorno de test (Angular 19.2 +
- * jest-preset-angular + jsdom) la combinación OnPush + ShadowDom hace que `fixture.detectChanges()`
- * dentro de un test NO refleje un cambio de @Input asignado directamente sobre la instancia (ni con
- * template ni con templateUrl) — aislado y reproducido con un componente mínimo separado antes de
- * asumir que era un bug propio. Con estrategia por defecto (sin OnPush) funciona correctamente;
- * dado que es un componente de presentación pequeño, el costo de no tener OnPush es despreciable.
- */
+// Sin ChangeDetectionStrategy.OnPush a propósito: en este entorno de test (Angular 19.2 +
+// jest-preset-angular + jsdom) la combinación OnPush + ShadowDom hace que fixture.detectChanges()
+// dentro de un test no refleje un cambio de @Input asignado directamente sobre la instancia.
 @Component({
   selector: 'ts-button',
   standalone: true,

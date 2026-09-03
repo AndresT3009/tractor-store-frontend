@@ -6,9 +6,9 @@ micro-frontends y una shell app, consumiendo el backend del repo hermano
 
 ## Stack
 
-Angular 19 (Standalone Components) · Nx 20 (monorepo integrado) · pnpm · TypeScript · SCSS · Jest ·
-Playwright. Module Federation, TailwindCSS + Design Tokens, Storybook y MSW se suman en fases
-posteriores (ver `docs/` en el repo hermano para el detalle de fases).
+Angular 19 (Standalone Components) · Nx 20 (monorepo integrado) · pnpm · TypeScript · SCSS ·
+TailwindCSS + Design Tokens · Storybook 9 · Jest · Playwright. Module Federation y MSW se suman en
+fases posteriores.
 
 ## Estructura
 
@@ -48,6 +48,22 @@ npx nx run-many --target=test --all
 npx nx run-many --target=build --all
 npx nx affected --target=test   # solo lo que cambió, comparado contra origin/main
 ```
+
+## Design system y Storybook
+
+```bash
+pnpm storybook          # ts-design-system en modo interactivo
+pnpm build-storybook    # build estático (storybook-static)
+```
+
+Los tokens de diseño viven en `packages/design-tokens` como CSS Custom Properties en tres capas
+(primitivos, semánticos, de componente) y se comparten con Tailwind vía `tailwind.preset.js`. Los
+componentes de `ts-design-system` se documentan con Storybook (CSF v3) y también se registran como
+Custom Elements reales (`packages/ts-design-system/src/lib/elements.ts`) para consumirse fuera de
+Angular.
+
+Para conectar regresión visual con Chromatic, exporta `CHROMATIC_PROJECT_TOKEN` (token del proyecto
+en [chromatic.com](https://www.chromatic.com/)) y corre `pnpm chromatic`.
 
 ## Notas de la Fase 3 (Nx monorepo)
 

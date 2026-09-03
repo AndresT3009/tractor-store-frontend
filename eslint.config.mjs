@@ -5,7 +5,7 @@ export default [
   ...nx.configs['flat/typescript'],
   ...nx.configs['flat/javascript'],
   {
-    ignores: ['**/dist'],
+    ignores: ['**/dist', '**/storybook-static'],
   },
   {
     files: ['**/*.ts', '**/*.tsx', '**/*.js', '**/*.jsx'],
@@ -14,10 +14,10 @@ export default [
         'error',
         {
           enforceBuildableLibDependency: true,
-          allow: ['^.*/eslint(\\.base)?\\.config\\.[cm]?js$'],
-          // Fase 3-4: la shell puede depender de todos; los MFEs pueden depender de
-          // shared-catalog, ts-design-system y design-tokens pero no entre ellos; shared-catalog y
-          // design-tokens no dependen de nada (son la base del grafo).
+          allow: [
+            '^.*/eslint(\\.base)?\\.config\\.[cm]?js$',
+            '^.*/design-tokens/src/.*\\.css$',
+          ],
           depConstraints: [
             {
               sourceTag: 'scope:shell',

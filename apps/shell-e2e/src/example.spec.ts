@@ -5,7 +5,7 @@ test('renders the shell header', async ({ page }) => {
   await expect(page.locator('header')).toContainText('shell');
 });
 
-test.describe('design tokens cross the Shadow DOM boundary (Fase 4)', () => {
+test.describe('design tokens cross the Shadow DOM boundary', () => {
   test('ts-button (Custom Element, ViewEncapsulation.ShadowDom) reacts to --color-primary', async ({
     page,
   }) => {
