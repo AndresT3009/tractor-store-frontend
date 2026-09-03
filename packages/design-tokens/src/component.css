@@ -13,4 +13,8 @@
   --card-border: var(--color-border);
   --card-radius: var(--radius-lg);
   --card-shadow: var(--shadow-sm);
+
+  --variant-option-border: var(--color-border);
+  --variant-option-border-selected: var(--color-primary);
+  --variant-option-size: 2rem;
 }
