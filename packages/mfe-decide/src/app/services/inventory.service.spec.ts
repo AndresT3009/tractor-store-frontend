@@ -1,7 +1,8 @@
 import { HttpTestingController, provideHttpClientTesting } from '@angular/common/http/testing';
 import { provideHttpClient } from '@angular/common/http';
 import { TestBed } from '@angular/core/testing';
-import { INVENTORY_API_URL, InventoryService } from './inventory.service';
+import { DECIDE_API_URL } from '../decide-api-url.token';
+import { InventoryService } from './inventory.service';
 
 describe('InventoryService', () => {
   let service: InventoryService;
@@ -12,7 +13,7 @@ describe('InventoryService', () => {
       providers: [
         provideHttpClient(),
         provideHttpClientTesting(),
-        { provide: INVENTORY_API_URL, useValue: 'http://api.test/api/inventory' },
+        { provide: DECIDE_API_URL, useValue: 'http://api.test/api' },
       ],
     });
 

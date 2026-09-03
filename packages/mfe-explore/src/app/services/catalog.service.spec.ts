@@ -1,7 +1,8 @@
 import { HttpTestingController, provideHttpClientTesting } from '@angular/common/http/testing';
 import { provideHttpClient } from '@angular/common/http';
 import { TestBed } from '@angular/core/testing';
-import { CATALOG_API_URL, CatalogService } from './catalog.service';
+import { EXPLORE_API_URL } from '../explore-api-url.token';
+import { CatalogService } from './catalog.service';
 
 describe('CatalogService', () => {
   let service: CatalogService;
@@ -12,7 +13,7 @@ describe('CatalogService', () => {
       providers: [
         provideHttpClient(),
         provideHttpClientTesting(),
-        { provide: CATALOG_API_URL, useValue: 'http://api.test/api/catalog' },
+        { provide: EXPLORE_API_URL, useValue: 'http://api.test/api' },
       ],
     });
 

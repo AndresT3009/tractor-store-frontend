@@ -1,6 +1,6 @@
 import { inject } from '@angular/core';
 import type { ResolveFn } from '@angular/router';
 import type { Store } from 'shared-catalog';
-import { CatalogService } from '../../services/catalog.service';
+import { CatalogFacade } from '../../state/catalog.facade';
 
-export const storesResolver: ResolveFn<Store[]> = () => inject(CatalogService).getStores();
+export const storesResolver: ResolveFn<Store[]> = () => inject(CatalogFacade).loadStores();

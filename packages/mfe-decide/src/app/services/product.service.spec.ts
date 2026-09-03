@@ -1,7 +1,8 @@
 import { HttpTestingController, provideHttpClientTesting } from '@angular/common/http/testing';
 import { provideHttpClient } from '@angular/common/http';
 import { TestBed } from '@angular/core/testing';
-import { CATALOG_API_URL, ProductService } from './product.service';
+import { DECIDE_API_URL } from '../decide-api-url.token';
+import { ProductService } from './product.service';
 
 describe('ProductService', () => {
   let service: ProductService;
@@ -12,7 +13,7 @@ describe('ProductService', () => {
       providers: [
         provideHttpClient(),
         provideHttpClientTesting(),
-        { provide: CATALOG_API_URL, useValue: 'http://api.test/api/catalog' },
+        { provide: DECIDE_API_URL, useValue: 'http://api.test/api' },
       ],
     });
 

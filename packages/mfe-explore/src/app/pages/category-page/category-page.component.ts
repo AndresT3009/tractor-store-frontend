@@ -1,7 +1,7 @@
-import { Component, Input } from '@angular/core';
+import { Component, inject, Input } from '@angular/core';
 import { RouterLink } from '@angular/router';
-import type { CategoryData } from 'shared-catalog';
 import { TsProductCardComponent } from 'ts-design-system';
+import { CatalogFacade } from '../../state/catalog.facade';
 
 @Component({
   selector: 'app-category-page',
@@ -11,7 +11,7 @@ import { TsProductCardComponent } from 'ts-design-system';
     <div class="mb-8 flex items-center justify-between">
       <h1 class="text-2xl font-semibold text-text">All Machines</h1>
       <nav class="flex gap-2 text-sm">
-        @for (available of category.availableFilters; track available) {
+        @for (available of catalog.category()?.availableFilters; track available) {
           <a
             [routerLink]="['/category', available]"
             class="rounded-full px-3 py-1"
@@ -26,7 +26,7 @@ import { TsProductCardComponent } from 'ts-design-system';
     </div>
 
     <div class="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3">
-      @for (product of category.products; track product.id) {
+      @for (product of catalog.category()?.products; track product.id) {
         <ts-product-card [product]="product" (chosen)="onProductChosen($event)" />
       }
     </div>
@@ -34,7 +34,7 @@ import { TsProductCardComponent } from 'ts-design-system';
 })
 export class CategoryPageComponent {
   @Input() filter = 'all';
-  @Input({ required: true }) category!: CategoryData;
+  protected readonly catalog = inject(CatalogFacade);
 
   onProductChosen(productId: string): void {
     // La navegación al detalle real vive en mfe-decide; sin Module Federation (Fase 9) todavía no

@@ -1,7 +1,8 @@
 import { HttpTestingController, provideHttpClientTesting } from '@angular/common/http/testing';
 import { provideHttpClient } from '@angular/common/http';
 import { TestBed } from '@angular/core/testing';
-import { CART_API_URL, CartService } from './cart.service';
+import { CHECKOUT_API_URL } from '../checkout-api-url.token';
+import { CartService } from './cart.service';
 
 describe('CartService', () => {
   let service: CartService;
@@ -12,7 +13,7 @@ describe('CartService', () => {
       providers: [
         provideHttpClient(),
         provideHttpClientTesting(),
-        { provide: CART_API_URL, useValue: 'http://api.test/api/cart' },
+        { provide: CHECKOUT_API_URL, useValue: 'http://api.test/api' },
       ],
     });
 

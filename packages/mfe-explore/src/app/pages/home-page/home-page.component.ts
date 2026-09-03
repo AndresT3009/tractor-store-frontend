@@ -1,6 +1,6 @@
-import { Component, Input } from '@angular/core';
+import { Component, inject } from '@angular/core';
 import { RouterLink } from '@angular/router';
-import type { HomeData } from 'shared-catalog';
+import { CatalogFacade } from '../../state/catalog.facade';
 
 @Component({
   selector: 'app-home-page',
@@ -9,7 +9,7 @@ import type { HomeData } from 'shared-catalog';
   template: `
     <h1 class="mb-8 text-2xl font-semibold text-text">The Tractor Store</h1>
     <div class="grid grid-cols-1 gap-6 sm:grid-cols-2">
-      @for (teaser of home.categories; track teaser.category) {
+      @for (teaser of catalog.home()?.categories; track teaser.category) {
         <a
           [routerLink]="['/category', teaser.category]"
           class="group block overflow-hidden rounded-lg border border-border bg-surface shadow-sm"
@@ -24,5 +24,5 @@ import type { HomeData } from 'shared-catalog';
   `,
 })
 export class HomePageComponent {
-  @Input({ required: true }) home!: HomeData;
+  protected readonly catalog = inject(CatalogFacade);
 }

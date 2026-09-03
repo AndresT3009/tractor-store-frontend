@@ -1,7 +1,8 @@
 import { HttpTestingController, provideHttpClientTesting } from '@angular/common/http/testing';
 import { provideHttpClient } from '@angular/common/http';
 import { TestBed } from '@angular/core/testing';
-import { ORDER_API_URL, OrderService } from './order.service';
+import { CHECKOUT_API_URL } from '../checkout-api-url.token';
+import { OrderService } from './order.service';
 
 describe('OrderService', () => {
   let service: OrderService;
@@ -12,7 +13,7 @@ describe('OrderService', () => {
       providers: [
         provideHttpClient(),
         provideHttpClientTesting(),
-        { provide: ORDER_API_URL, useValue: 'http://api.test/api/orders' },
+        { provide: CHECKOUT_API_URL, useValue: 'http://api.test/api' },
       ],
     });
 

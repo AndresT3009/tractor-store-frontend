@@ -1,8 +1,9 @@
 import { Component, inject, Input } from '@angular/core';
-import { ReactiveFormsModule, FormBuilder, Validators } from '@angular/forms';
+import { ReactiveFormsModule } from '@angular/forms';
 import { Router, RouterLink } from '@angular/router';
 import type { Store } from 'shared-catalog';
 import { TsButtonComponent } from 'ts-design-system';
+import { CheckoutFormFactory } from '../../forms/checkout-form.factory';
 import { OrderService } from '../../services/order.service';
 
 @Component({
@@ -52,17 +53,12 @@ import { OrderService } from '../../services/order.service';
 export class CheckoutPageComponent {
   @Input({ required: true }) stores!: Store[];
 
-  private readonly formBuilder = inject(FormBuilder);
+  private readonly formFactory = inject(CheckoutFormFactory);
   private readonly orderService = inject(OrderService);
   private readonly router = inject(Router);
 
   submitted = false;
-
-  form = this.formBuilder.nonNullable.group({
-    firstName: ['', Validators.required],
-    lastName: ['', Validators.required],
-    storeId: ['', Validators.required],
-  });
+  form = this.formFactory.create();
 
   placeOrder(): void {
     if (this.form.invalid) {
