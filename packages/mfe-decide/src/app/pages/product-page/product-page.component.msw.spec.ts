@@ -1,7 +1,11 @@
 import { provideHttpClient } from '@angular/common/http';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { provideRouter } from '@angular/router';
+// mock-api solo se importa dinámicamente desde código de producción (bootstrap.ts) para no
+// pagar su peso en el bundle real; un test nunca se bundlea, así que aquí sí conviene estático.
+// eslint-disable-next-line @nx/enforce-module-boundaries
 import { resetMockApiState } from 'mock-api';
+// eslint-disable-next-line @nx/enforce-module-boundaries
 import { server } from 'mock-api/node';
 import { firstValueFrom } from 'rxjs';
 import { ProductPageComponent } from './product-page.component';
