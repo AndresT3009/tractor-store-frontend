@@ -1,0 +1,6 @@
+{
+  "apiUrl": "${API_URL}",
+  "federation": {
+    "mfeExplore": "${MFE_EXPLORE_URL}/remoteEntry.json"
+  }
+}

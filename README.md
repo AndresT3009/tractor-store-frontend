@@ -193,15 +193,15 @@ ni Angular alrededor.
 Para conectar regresión visual con Chromatic, exporta `CHROMATIC_PROJECT_TOKEN` (token del proyecto
 en [chromatic.com](https://www.chromatic.com/)) y corre `pnpm chromatic`.
 
+## CI
+
+`.github/workflows/sonarcloud.yml` corre tests con cobertura + análisis de SonarCloud en cada push
+a `main` y cada PR. `.github/workflows/dependabot-auto-merge.yml` aprueba solo las actualizaciones
+de Dependabot que no sean major.
+
 ## Cómo desplegarlo
 
-Las 4 apps son SPAs estáticas puras (sin SSR): el resultado de `nx build <app>` en
-`dist/<app>/browser` se sirve con cualquier hosting de archivos estáticos con soporte de rutas SPA
-(fallback a `index.html`) y CORS habilitado hacia los otros orígenes (Netlify, Vercel, un bucket S3
-+ CloudFront, nginx con `try_files`, etc.) — `serve-static` en cada `project.json` usa
-`@nx/web:file-server` como referencia local de ese mismo modo de servir. Cada app necesita
-desplegarse en un origen propio y accesible desde los demás; el shell (`main.ts`) tiene hardcodeadas
-las URLs de `remoteEntry.json` de los tres MFEs (`http://localhost:PORT` en desarrollo) — en
-producción esas URLs deben apuntar a los dominios reales donde cada MFE termine publicado antes de
-buildear el shell. El backend necesita `CORS_ALLOWED_ORIGINS` actualizado con esos mismos dominios
-(ver README de `tractor-store-backend`).
+Las 4 apps son SPAs estáticas puras (sin SSR), cada una con su propio `Dockerfile` (nginx +
+entrypoint que reescribe `runtime-config.json` desde variables de entorno, en vez de hardcodear las
+URLs de los otros MFEs y del backend en el build). Ver [`DEPLOYMENT.md`](DEPLOYMENT.md) para la
+guía completa de despliegue en Railway.
