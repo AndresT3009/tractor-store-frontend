@@ -22,13 +22,35 @@ export default defineConfig({
     /* Collect trace when retrying the failed test. See https://playwright.dev/docs/trace-viewer */
     trace: 'on-first-retry',
   },
-  /* Run your local dev server before starting the tests */
-  webServer: {
-    command: 'npx nx run shell:serve',
-    url: 'http://localhost:4200',
-    reuseExistingServer: !process.env.CI,
-    cwd: workspaceRoot,
-  },
+  /* Levanta el shell y los 3 MFEs: la app compuesta vía Module Federation solo funciona con los
+     cuatro sirviendo a la vez (igual que pnpm serve:all). Con ?mock=1 en la URL (ver
+     golden-path.spec.ts) el flujo completo no necesita el backend real ni Postgres. */
+  webServer: [
+    {
+      command: 'npx nx run mfe-explore:serve',
+      url: 'http://localhost:4201/remoteEntry.json',
+      reuseExistingServer: !process.env.CI,
+      cwd: workspaceRoot,
+    },
+    {
+      command: 'npx nx run mfe-decide:serve',
+      url: 'http://localhost:4202/remoteEntry.json',
+      reuseExistingServer: !process.env.CI,
+      cwd: workspaceRoot,
+    },
+    {
+      command: 'npx nx run mfe-checkout:serve',
+      url: 'http://localhost:4203/remoteEntry.json',
+      reuseExistingServer: !process.env.CI,
+      cwd: workspaceRoot,
+    },
+    {
+      command: 'npx nx run shell:serve',
+      url: 'http://localhost:4200',
+      reuseExistingServer: !process.env.CI,
+      cwd: workspaceRoot,
+    },
+  ],
   projects: [
     {
       name: 'chromium',

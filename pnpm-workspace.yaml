@@ -11,4 +11,5 @@ allowBuilds:
   esbuild: true
   lmdb: true
   msgpackr-extract: false
+  msw: true
   nx: true

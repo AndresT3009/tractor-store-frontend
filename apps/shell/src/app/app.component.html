@@ -5,8 +5,8 @@
 
   <div class="border-b border-border bg-surface px-6 py-2">
     <div class="mx-auto flex max-w-6xl items-center justify-end gap-4 text-sm text-text-muted">
-      <!-- Demo de Web Components (Fase 4): <ts-button> como Custom Element vainilla, aparte
-           del MiniCart real que compone el estado del carrito. -->
+      <!-- Demo de Web Components: <ts-button> como Custom Element vainilla, aparte del
+           MiniCart real que compone el estado del carrito. -->
       <ts-button-element data-testid="cart-button">Carrito</ts-button-element>
       @if (miniCartComponent(); as miniCart) {
         <ng-container *ngComponentOutlet="miniCart" />

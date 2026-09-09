@@ -5,7 +5,7 @@ export default [
   ...nx.configs['flat/typescript'],
   ...nx.configs['flat/javascript'],
   {
-    ignores: ['**/dist', '**/storybook-static'],
+    ignores: ['**/dist', '**/storybook-static', '**/public/mockServiceWorker.js'],
   },
   {
     files: ['**/*.ts', '**/*.tsx', '**/*.js', '**/*.jsx'],
@@ -26,6 +26,7 @@ export default [
                 'scope:shared-catalog',
                 'scope:ts-design-system',
                 'scope:design-tokens',
+                'scope:mock-api',
                 'scope:mfe-explore',
                 'scope:mfe-decide',
                 'scope:mfe-checkout',
@@ -38,6 +39,7 @@ export default [
                 'scope:shared-catalog',
                 'scope:ts-design-system',
                 'scope:design-tokens',
+                'scope:mock-api',
               ],
             },
             {
@@ -47,6 +49,7 @@ export default [
                 'scope:shared-catalog',
                 'scope:ts-design-system',
                 'scope:design-tokens',
+                'scope:mock-api',
               ],
             },
             {
@@ -56,6 +59,7 @@ export default [
                 'scope:shared-catalog',
                 'scope:ts-design-system',
                 'scope:design-tokens',
+                'scope:mock-api',
               ],
             },
             {
@@ -73,6 +77,10 @@ export default [
             {
               sourceTag: 'scope:design-tokens',
               onlyDependOnLibsWithTags: ['scope:design-tokens'],
+            },
+            {
+              sourceTag: 'scope:mock-api',
+              onlyDependOnLibsWithTags: ['scope:mock-api', 'scope:shared-catalog'],
             },
           ],
         },

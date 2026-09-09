@@ -1,5 +1,5 @@
 import { Component, inject, Input } from '@angular/core';
-import { RouterLink } from '@angular/router';
+import { Router, RouterLink } from '@angular/router';
 import { TsProductCardComponent } from 'ts-design-system';
 import { CatalogFacade } from '../../state/catalog.facade';
 
@@ -35,10 +35,11 @@ import { CatalogFacade } from '../../state/catalog.facade';
 export class CategoryPageComponent {
   @Input() filter = 'all';
   protected readonly catalog = inject(CatalogFacade);
+  private readonly router = inject(Router);
 
   onProductChosen(productId: string): void {
-    // La navegación al detalle real vive en mfe-decide; sin Module Federation (Fase 9) todavía no
-    // hay forma de cruzar a esa app desde aquí.
-    console.info('product chosen', productId);
+    // La página de detalle es de mfe-decide, pero al estar compuestas por el shell en el mismo
+    // Router es una navegación de ruta normal, no una llamada cross-MFE.
+    this.router.navigate(['/product', productId]);
   }
 }

@@ -15,7 +15,9 @@ export default {
   // @angular-architects/native-federation declara "type": "commonjs" pero su entry point
   // (src/index.js) usa `export * from ...` (sintaxis ESM) — sin esta excepción, Jest lo deja
   // sin transformar y falla al parsearlo como CommonJS.
-  transformIgnorePatterns: ['node_modules/(?!.*\\.mjs$|.*@angular-architects.native-federation)'],
+  transformIgnorePatterns: [
+    'node_modules/(?!.*\\.mjs$|.*@angular-architects.native-federation|.*until-async)',
+  ],
   snapshotSerializers: [
     'jest-preset-angular/build/serializers/no-ng-attributes',
     'jest-preset-angular/build/serializers/ng-snapshot',

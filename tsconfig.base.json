@@ -16,7 +16,10 @@
     "baseUrl": ".",
     "paths": {
       "shared-catalog": ["packages/shared-catalog/src/index.ts"],
-      "ts-design-system": ["packages/ts-design-system/src/index.ts"]
+      "ts-design-system": ["packages/ts-design-system/src/index.ts"],
+      "mock-api": ["packages/mock-api/src/index.ts"],
+      "mock-api/browser": ["packages/mock-api/src/lib/browser.ts"],
+      "mock-api/node": ["packages/mock-api/src/lib/node.ts"]
     }
   },
   "exclude": ["node_modules", "tmp"]
