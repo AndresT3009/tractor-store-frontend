@@ -45,3 +45,6 @@ Thumbs.db
 
 
 storybook-static
+
+# generado por el builder de Native Federation en cada build/serve
+tsconfig.federation.json

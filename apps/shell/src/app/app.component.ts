@@ -1,5 +1,7 @@
-import { CUSTOM_ELEMENTS_SCHEMA, Component } from '@angular/core';
+import { CUSTOM_ELEMENTS_SCHEMA, Component, DestroyRef, inject, signal } from '@angular/core';
 import { RouterModule } from '@angular/router';
+import type { CartItemAddedEvent } from 'shared-catalog';
+import { CART_ITEM_ADDED_EVENT } from 'shared-catalog';
 
 @Component({
   imports: [RouterModule],
@@ -12,4 +14,19 @@ import { RouterModule } from '@angular/router';
 })
 export class AppComponent {
   title = 'shell';
+
+  // El carrito vive en mfe-checkout (detrás de la cookie de sesión); el shell solo escucha el
+  // evento cross-MFE que emite al agregar un ítem, sin depender de su estado interno.
+  protected readonly cartItemCount = signal(0);
+
+  private readonly onCartItemAdded = (event: Event) => {
+    this.cartItemCount.set((event as CartItemAddedEvent).detail.totalItems);
+  };
+
+  constructor() {
+    window.addEventListener(CART_ITEM_ADDED_EVENT, this.onCartItemAdded);
+    inject(DestroyRef).onDestroy(() =>
+      window.removeEventListener(CART_ITEM_ADDED_EVENT, this.onCartItemAdded)
+    );
+  }
 }

@@ -10,7 +10,7 @@ test.describe('design tokens cross the Shadow DOM boundary', () => {
     page,
   }) => {
     await page.goto('/');
-    const cartButton = page.locator('ts-button[data-testid="cart-button"]');
+    const cartButton = page.locator('ts-button-element[data-testid="cart-button"]');
     await expect(cartButton).toBeVisible();
 
     const readBackgroundColor = () =>
@@ -34,7 +34,7 @@ test.describe('design tokens cross the Shadow DOM boundary', () => {
 
   test('ts-button dispatches its @Output as a vanilla CustomEvent', async ({ page }) => {
     await page.goto('/');
-    const cartButton = page.locator('ts-button[data-testid="cart-button"]');
+    const cartButton = page.locator('ts-button-element[data-testid="cart-button"]');
     await expect(cartButton).toBeVisible();
 
     await cartButton.evaluate((host) => {

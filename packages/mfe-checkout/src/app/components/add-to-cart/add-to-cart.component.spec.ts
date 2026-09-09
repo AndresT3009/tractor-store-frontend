@@ -21,7 +21,7 @@ describe('AddToCartComponent', () => {
     }).compileComponents();
 
     fixture = TestBed.createComponent(AddToCartComponent);
-    fixture.componentInstance.sku = 'SF-TITAN-COPPER';
+    fixture.componentRef.setInput('sku', 'SF-TITAN-COPPER');
     fixture.detectChanges();
   });
 

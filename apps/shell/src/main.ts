@@ -1,8 +1,10 @@
-import { bootstrapApplication } from '@angular/platform-browser';
-import { registerTsDesignSystemElements } from 'ts-design-system';
-import { appConfig } from './app/app.config';
-import { AppComponent } from './app/app.component';
+import { initFederation } from '@angular-architects/native-federation';
 
-registerTsDesignSystemElements()
-  .then(() => bootstrapApplication(AppComponent, appConfig))
+initFederation({
+  mfeExplore: 'http://localhost:4201/remoteEntry.json',
+  mfeDecide: 'http://localhost:4202/remoteEntry.json',
+  mfeCheckout: 'http://localhost:4203/remoteEntry.json',
+})
+  .catch((err) => console.error(err))
+  .then(() => import('./bootstrap'))
   .catch((err) => console.error(err));

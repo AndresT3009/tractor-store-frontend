@@ -2,6 +2,7 @@ import { inject, Injectable } from '@angular/core';
 import type { Observable } from 'rxjs';
 import { tap } from 'rxjs';
 import type { Cart } from 'shared-catalog';
+import { CART_ITEM_ADDED_EVENT } from 'shared-catalog';
 import { CartService } from '../services/cart.service';
 import { CartStore } from './cart.store';
 
@@ -15,7 +16,16 @@ export class CartActions {
   }
 
   addItem(sku: string): Observable<Cart> {
-    return this.cartService.addItem(sku).pipe(tap((cart) => this.store.setCart(cart)));
+    return this.cartService.addItem(sku).pipe(
+      tap((cart) => {
+        this.store.setCart(cart);
+        window.dispatchEvent(
+          new CustomEvent(CART_ITEM_ADDED_EVENT, {
+            detail: { sku, totalItems: cart.totalQuantity },
+          })
+        );
+      })
+    );
   }
 
   removeItem(sku: string): Observable<Cart> {

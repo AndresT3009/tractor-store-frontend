@@ -1,5 +1,6 @@
-import { CurrencyPipe } from '@angular/common';
-import { Component, inject } from '@angular/core';
+import { loadRemoteModule } from '@angular-architects/native-federation';
+import { CurrencyPipe, NgComponentOutlet } from '@angular/common';
+import { Component, inject, signal, Type } from '@angular/core';
 import { Router } from '@angular/router';
 import { TsProductCardComponent, TsVariantOptionComponent } from 'ts-design-system';
 import { ProductFacade } from '../../state/product.facade';
@@ -8,7 +9,7 @@ import { encodeVariantQueryParams } from './variant-url.util';
 @Component({
   selector: 'app-product-page',
   standalone: true,
-  imports: [CurrencyPipe, TsVariantOptionComponent, TsProductCardComponent],
+  imports: [CurrencyPipe, TsVariantOptionComponent, TsProductCardComponent, NgComponentOutlet],
   template: `
     @if (facade.product(); as productDetail) {
       <div class="grid grid-cols-1 gap-8 md:grid-cols-2">
@@ -49,6 +50,14 @@ import { encodeVariantQueryParams } from './variant-url.util';
               }
             </p>
           }
+
+          @if (addToCartComponent(); as cmp) {
+            @if (facade.selectedSku(); as sku) {
+              <div class="mt-6">
+                <ng-container *ngComponentOutlet="cmp; inputs: { sku: sku }" />
+              </div>
+            }
+          }
         </div>
       </div>
 
@@ -76,6 +85,16 @@ import { encodeVariantQueryParams } from './variant-url.util';
 export class ProductPageComponent {
   protected readonly facade = inject(ProductFacade);
   private readonly router = inject(Router);
+
+  // Cargado de mfe-checkout vía Module Federation: el botón "Add to basket" es responsabilidad
+  // del equipo de Checkout, aunque vive visualmente en la página de producto.
+  protected readonly addToCartComponent = signal<Type<unknown> | null>(null);
+
+  constructor() {
+    loadRemoteModule('mfeCheckout', './AddToCart')
+      .then((m) => this.addToCartComponent.set(m.AddToCartComponent))
+      .catch((err) => console.error(err));
+  }
 
   selectVariant(sku: string): void {
     this.facade.selectVariant(sku).subscribe();

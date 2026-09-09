@@ -1,11 +1,11 @@
-import { Component, inject, Input, OnInit, signal } from '@angular/core';
+import { Component, inject, Input, OnChanges, signal } from '@angular/core';
 import { ReactiveFormsModule } from '@angular/forms';
 import { TsButtonComponent } from 'ts-design-system';
 import { AddToCartFormFactory } from '../../forms/add-to-cart-form.factory';
 import { CartFacade } from '../../state/cart.facade';
 
-// Componente propio de Checkout, pensado para exponerse vía Module Federation (Fase 9) y
-// embeberse en la página de producto de mfe-decide — de ahí que no tenga ruta propia todavía.
+// Sin ruta propia: se expone vía Module Federation y se embebe en la página de producto de
+// mfe-decide, que es dueña de cuál variante (sku) está seleccionada en cada momento.
 @Component({
   selector: 'app-add-to-cart',
   standalone: true,
@@ -18,7 +18,7 @@ import { CartFacade } from '../../state/cart.facade';
     </form>
   `,
 })
-export class AddToCartComponent implements OnInit {
+export class AddToCartComponent implements OnChanges {
   @Input({ required: true }) sku!: string;
 
   private readonly formFactory = inject(AddToCartFormFactory);
@@ -27,7 +27,9 @@ export class AddToCartComponent implements OnInit {
   protected readonly submitting = signal(false);
   form!: ReturnType<AddToCartFormFactory['create']>;
 
-  ngOnInit(): void {
+  // NgComponentOutlet reasigna el sku (vía setInput) sin destruir la instancia cuando cambia la
+  // variante seleccionada, así que el formulario se reconstruye en cada cambio, no solo al crear.
+  ngOnChanges(): void {
     this.form = this.formFactory.create(this.sku);
   }
 

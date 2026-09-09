@@ -6,14 +6,14 @@
   "sourceRoot": "packages/mfe-checkout/src",
   "tags": ["scope:mfe-checkout"],
   "targets": {
-    "build": {
+    "esbuild": {
       "executor": "@angular-devkit/build-angular:application",
       "outputs": ["{options.outputPath}"],
       "options": {
         "outputPath": "dist/packages/mfe-checkout",
         "index": "packages/mfe-checkout/src/index.html",
         "browser": "packages/mfe-checkout/src/main.ts",
-        "polyfills": ["zone.js"],
+        "polyfills": ["zone.js", "es-module-shims"],
         "tsConfig": "packages/mfe-checkout/tsconfig.app.json",
         "inlineStyleLanguage": "scss",
         "assets": [
@@ -49,20 +49,43 @@
       },
       "defaultConfiguration": "production"
     },
-    "serve": {
+    "build": {
+      "executor": "@angular-architects/native-federation:build",
+      "options": {},
+      "configurations": {
+        "production": {
+          "target": "mfe-checkout:esbuild:production"
+        },
+        "development": {
+          "target": "mfe-checkout:esbuild:development",
+          "dev": true
+        }
+      },
+      "defaultConfiguration": "production"
+    },
+    "serve-original": {
       "executor": "@angular-devkit/build-angular:dev-server",
       "options": {
         "port": 4203
       },
       "configurations": {
         "production": {
-          "buildTarget": "mfe-checkout:build:production"
+          "buildTarget": "mfe-checkout:esbuild:production"
         },
         "development": {
-          "buildTarget": "mfe-checkout:build:development"
+          "buildTarget": "mfe-checkout:esbuild:development"
         }
       },
       "defaultConfiguration": "development"
+    },
+    "serve": {
+      "executor": "@angular-architects/native-federation:build",
+      "options": {
+        "target": "mfe-checkout:serve-original:development",
+        "rebuildDelay": 0,
+        "dev": true,
+        "port": 0
+      }
     },
     "extract-i18n": {
       "executor": "@angular-devkit/build-angular:extract-i18n",

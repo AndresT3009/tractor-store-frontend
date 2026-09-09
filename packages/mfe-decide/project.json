@@ -6,14 +6,14 @@
   "sourceRoot": "packages/mfe-decide/src",
   "tags": ["scope:mfe-decide"],
   "targets": {
-    "build": {
+    "esbuild": {
       "executor": "@angular-devkit/build-angular:application",
       "outputs": ["{options.outputPath}"],
       "options": {
         "outputPath": "dist/packages/mfe-decide",
         "index": "packages/mfe-decide/src/index.html",
         "browser": "packages/mfe-decide/src/main.ts",
-        "polyfills": ["zone.js"],
+        "polyfills": ["zone.js", "es-module-shims"],
         "tsConfig": "packages/mfe-decide/tsconfig.app.json",
         "inlineStyleLanguage": "scss",
         "assets": [
@@ -49,20 +49,43 @@
       },
       "defaultConfiguration": "production"
     },
-    "serve": {
+    "build": {
+      "executor": "@angular-architects/native-federation:build",
+      "options": {},
+      "configurations": {
+        "production": {
+          "target": "mfe-decide:esbuild:production"
+        },
+        "development": {
+          "target": "mfe-decide:esbuild:development",
+          "dev": true
+        }
+      },
+      "defaultConfiguration": "production"
+    },
+    "serve-original": {
       "executor": "@angular-devkit/build-angular:dev-server",
       "options": {
         "port": 4202
       },
       "configurations": {
         "production": {
-          "buildTarget": "mfe-decide:build:production"
+          "buildTarget": "mfe-decide:esbuild:production"
         },
         "development": {
-          "buildTarget": "mfe-decide:build:development"
+          "buildTarget": "mfe-decide:esbuild:development"
         }
       },
       "defaultConfiguration": "development"
+    },
+    "serve": {
+      "executor": "@angular-architects/native-federation:build",
+      "options": {
+        "target": "mfe-decide:serve-original:development",
+        "rebuildDelay": 0,
+        "dev": true,
+        "port": 0
+      }
     },
     "extract-i18n": {
       "executor": "@angular-devkit/build-angular:extract-i18n",

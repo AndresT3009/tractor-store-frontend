@@ -1,7 +1,8 @@
-import { bootstrapApplication } from '@angular/platform-browser';
-import { appConfig } from './app/app.config';
-import { AppComponent } from './app/app.component';
+import { initFederation } from '@angular-architects/native-federation';
 
-bootstrapApplication(AppComponent, appConfig).catch((err) =>
-  console.error(err)
-);
+initFederation({
+  mfeCheckout: 'http://localhost:4203/remoteEntry.json',
+})
+  .catch((err) => console.error(err))
+  .then(() => import('./bootstrap'))
+  .catch((err) => console.error(err));

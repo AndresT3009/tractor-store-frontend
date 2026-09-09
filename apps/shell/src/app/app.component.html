@@ -3,7 +3,7 @@
     <div class="mx-auto flex max-w-6xl items-center justify-between">
       <span class="text-lg font-semibold text-primary">{{ title }}</span>
       <nav class="flex items-center gap-6 text-sm text-text-muted">
-        <ts-button data-testid="cart-button">Carrito</ts-button>
+        <ts-button-element data-testid="cart-button">Carrito ({{ cartItemCount() }})</ts-button-element>
       </nav>
     </div>
   </header>
