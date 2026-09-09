@@ -1,6 +1,6 @@
 import { TestBed } from '@angular/core/testing';
 import { of } from 'rxjs';
-import type { ProductDetail, Recommendation, Stock } from 'shared-catalog';
+import type { ProductDetail, Stock } from 'shared-catalog';
 import { InventoryService } from '../services/inventory.service';
 import { ProductService } from '../services/product.service';
 import { ProductFacade } from './product.facade';
@@ -23,12 +23,10 @@ describe('ProductFacade', () => {
     ],
   };
   const stock: Stock = { sku: 'SF-TITAN-COPPER', quantityAvailable: 6, available: true };
-  const recommendations: Recommendation[] = [];
 
   beforeEach(() => {
     productService = {
       getProduct: jest.fn().mockReturnValue(of(product)),
-      getRecommendations: jest.fn().mockReturnValue(of(recommendations)),
     } as unknown as jest.Mocked<ProductService>;
     inventoryService = {
       getStock: jest.fn().mockReturnValue(of(stock)),
@@ -64,10 +62,9 @@ describe('ProductFacade', () => {
     expect(facade.selectedSku()).toBe('SF-TITAN-COPPER');
   });
 
-  it('updates stock and recommendations when selecting a variant', () => {
+  it('updates stock when selecting a variant', () => {
     facade.selectVariant('SF-TITAN-COPPER').subscribe();
 
     expect(facade.stock()).toEqual(stock);
-    expect(facade.recommendations()).toEqual(recommendations);
   });
 });

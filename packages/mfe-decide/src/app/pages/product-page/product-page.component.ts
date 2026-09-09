@@ -2,14 +2,14 @@ import { loadRemoteModule } from '@angular-architects/native-federation';
 import { CurrencyPipe, NgComponentOutlet } from '@angular/common';
 import { Component, inject, signal, Type } from '@angular/core';
 import { Router } from '@angular/router';
-import { TsProductCardComponent, TsVariantOptionComponent } from 'ts-design-system';
+import { TsVariantOptionComponent } from 'ts-design-system';
 import { ProductFacade } from '../../state/product.facade';
 import { encodeVariantQueryParams } from './variant-url.util';
 
 @Component({
   selector: 'app-product-page',
   standalone: true,
-  imports: [CurrencyPipe, TsVariantOptionComponent, TsProductCardComponent, NgComponentOutlet],
+  imports: [CurrencyPipe, TsVariantOptionComponent, NgComponentOutlet],
   template: `
     @if (facade.product(); as productDetail) {
       <div class="grid grid-cols-1 gap-8 md:grid-cols-2">
@@ -61,23 +61,10 @@ import { encodeVariantQueryParams } from './variant-url.util';
         </div>
       </div>
 
-      @if (facade.recommendations().length > 0) {
-        <div class="mt-16">
-          <h2 class="mb-4 text-lg font-semibold text-text">You might also like</h2>
-          <div class="grid grid-cols-2 gap-6 sm:grid-cols-4">
-            @for (recommendation of facade.recommendations(); track recommendation.sku) {
-              <ts-product-card
-                [product]="{
-                  id: recommendation.productId,
-                  name: recommendation.productName,
-                  price: recommendation.price,
-                  imageUrl: recommendation.imageUrl,
-                  category: '',
-                }"
-              />
-            }
-          </div>
-        </div>
+      @if (recommendationsComponent(); as cmp) {
+        @if (facade.selectedSku(); as sku) {
+          <ng-container *ngComponentOutlet="cmp; inputs: { sku: sku }" />
+        }
       }
     }
   `,
@@ -86,13 +73,17 @@ export class ProductPageComponent {
   protected readonly facade = inject(ProductFacade);
   private readonly router = inject(Router);
 
-  // Cargado de mfe-checkout vía Module Federation: el botón "Add to basket" es responsabilidad
-  // del equipo de Checkout, aunque vive visualmente en la página de producto.
+  // Los dos se cargan de otros MFEs vía Module Federation: "Add to basket" es de Checkout
+  // (aunque vive visualmente aquí) y las recomendaciones son de Explore, no de Decide.
   protected readonly addToCartComponent = signal<Type<unknown> | null>(null);
+  protected readonly recommendationsComponent = signal<Type<unknown> | null>(null);
 
   constructor() {
     loadRemoteModule('mfeCheckout', './AddToCart')
       .then((m) => this.addToCartComponent.set(m.AddToCartComponent))
+      .catch((err) => console.error(err));
+    loadRemoteModule('mfeExplore', './Recommendations')
+      .then((m) => this.recommendationsComponent.set(m.RecommendationsComponent))
       .catch((err) => console.error(err));
   }
 

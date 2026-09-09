@@ -11,7 +11,6 @@ export class ProductFacade {
   readonly selectedSku = this.selectors.selectedSku;
   readonly selectedVariant = this.selectors.selectedVariant;
   readonly stock = this.selectors.stock;
-  readonly recommendations = this.selectors.recommendations;
 
   loadProduct(id: string, initialSku: string | null) {
     return this.actions.loadProduct(id, initialSku);

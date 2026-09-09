@@ -1,18 +1,16 @@
 import { Injectable, signal } from '@angular/core';
-import type { ProductDetail, Recommendation, Stock } from 'shared-catalog';
+import type { ProductDetail, Stock } from 'shared-catalog';
 
 interface ProductState {
   product: ProductDetail | null;
   selectedSku: string | null;
   stock: Stock | null;
-  recommendations: Recommendation[];
 }
 
 const initialState: ProductState = {
   product: null,
   selectedSku: null,
   stock: null,
-  recommendations: [],
 };
 
 @Injectable({ providedIn: 'root' })
@@ -30,9 +28,5 @@ export class ProductStore {
 
   setStock(stock: Stock): void {
     this.state.update((current) => ({ ...current, stock }));
-  }
-
-  setRecommendations(recommendations: Recommendation[]): void {
-    this.state.update((current) => ({ ...current, recommendations }));
   }
 }

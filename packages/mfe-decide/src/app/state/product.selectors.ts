@@ -8,7 +8,6 @@ export class ProductSelectors {
   readonly product = computed(() => this.store.snapshot().product);
   readonly selectedSku = computed(() => this.store.snapshot().selectedSku);
   readonly stock = computed(() => this.store.snapshot().stock);
-  readonly recommendations = computed(() => this.store.snapshot().recommendations);
 
   readonly selectedVariant = computed(() =>
     this.store.snapshot().product?.variants.find((variant) => variant.sku === this.selectedSku())

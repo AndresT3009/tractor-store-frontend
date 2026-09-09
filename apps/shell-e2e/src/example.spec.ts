@@ -1,8 +1,8 @@
 import { test, expect } from '@playwright/test';
 
-test('renders the shell header', async ({ page }) => {
+test('composes the header exposed by mfe-explore via Module Federation', async ({ page }) => {
   await page.goto('/');
-  await expect(page.locator('header')).toContainText('shell');
+  await expect(page.locator('header')).toContainText('The Tractor Store');
 });
 
 test.describe('design tokens cross the Shadow DOM boundary', () => {

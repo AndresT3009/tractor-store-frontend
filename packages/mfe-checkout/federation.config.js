@@ -6,6 +6,7 @@ module.exports = withNativeFederation({
   exposes: {
     './Routes': './packages/mfe-checkout/src/app/app.routes.ts',
     './AddToCart': './packages/mfe-checkout/src/app/components/add-to-cart/add-to-cart.component.ts',
+    './MiniCart': './packages/mfe-checkout/src/app/components/mini-cart/mini-cart.component.ts',
   },
 
   shared: {

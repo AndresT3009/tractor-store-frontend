@@ -4,7 +4,11 @@
     "outDir": "../../dist/out-tsc",
     "types": []
   },
-  "files": ["src/main.ts", "src/app/components/add-to-cart/add-to-cart.component.ts"],
+  "files": [
+    "src/main.ts",
+    "src/app/components/add-to-cart/add-to-cart.component.ts",
+    "src/app/components/mini-cart/mini-cart.component.ts"
+  ],
   "include": ["src/**/*.d.ts"],
   "exclude": ["jest.config.ts", "src/**/*.test.ts", "src/**/*.spec.ts"]
 }

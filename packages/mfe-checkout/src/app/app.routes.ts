@@ -1,6 +1,5 @@
 import { Route } from '@angular/router';
 import { cartResolver } from './pages/cart-page/cart-page.resolver';
-import { storesResolver } from './pages/checkout-page/checkout-page.resolver';
 import { unsavedChangesGuard } from './pages/checkout-page/checkout-page.guard';
 import { orderResolver } from './pages/thanks-page/thanks-page.resolver';
 
@@ -18,7 +17,6 @@ export const appRoutes: Route[] = [
       import('./pages/checkout-page/checkout-page.component').then(
         (m) => m.CheckoutPageComponent
       ),
-    resolve: { stores: storesResolver },
     canDeactivate: [unsavedChangesGuard],
   },
   {

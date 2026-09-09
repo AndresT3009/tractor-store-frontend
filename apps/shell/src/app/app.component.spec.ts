@@ -9,16 +9,16 @@ describe('AppComponent', () => {
     }).compileComponents();
   });
 
-  it('should render the site title in the header', () => {
+  it('creates the shell root component', () => {
+    const fixture = TestBed.createComponent(AppComponent);
+    fixture.detectChanges();
+    expect(fixture.componentInstance).toBeTruthy();
+  });
+
+  it('renders the vanilla Custom Element cart button', () => {
     const fixture = TestBed.createComponent(AppComponent);
     fixture.detectChanges();
     const compiled = fixture.nativeElement as HTMLElement;
-    expect(compiled.querySelector('header')?.textContent).toContain('shell');
-  });
-
-  it(`should have as title 'shell'`, () => {
-    const fixture = TestBed.createComponent(AppComponent);
-    const app = fixture.componentInstance;
-    expect(app.title).toEqual('shell');
+    expect(compiled.querySelector('[data-testid="cart-button"]')).toBeTruthy();
   });
 });

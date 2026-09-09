@@ -87,6 +87,29 @@
         "port": 0
       }
     },
+    "custom-element": {
+      "executor": "@angular-devkit/build-angular:application",
+      "outputs": ["{options.outputPath}"],
+      "options": {
+        "outputPath": "dist/packages/mfe-explore-custom-element",
+        "index": "packages/mfe-explore/src/custom-element-index.html",
+        "browser": "packages/mfe-explore/src/custom-element.main.ts",
+        "polyfills": ["zone.js"],
+        "tsConfig": "packages/mfe-explore/tsconfig.app.json",
+        "scripts": []
+      },
+      "configurations": {
+        "production": {
+          "outputHashing": "none"
+        },
+        "development": {
+          "optimization": false,
+          "extractLicenses": false,
+          "sourceMap": true
+        }
+      },
+      "defaultConfiguration": "production"
+    },
     "extract-i18n": {
       "executor": "@angular-devkit/build-angular:extract-i18n",
       "options": {

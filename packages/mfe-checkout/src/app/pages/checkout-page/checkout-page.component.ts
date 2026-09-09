@@ -1,7 +1,10 @@
-import { Component, inject, Input } from '@angular/core';
+import { loadRemoteModule } from '@angular-architects/native-federation';
+import { NgComponentOutlet } from '@angular/common';
+import { Component, inject, OnDestroy, signal, Type } from '@angular/core';
 import { ReactiveFormsModule } from '@angular/forms';
 import { Router, RouterLink } from '@angular/router';
-import type { Store } from 'shared-catalog';
+import type { StoreSelectedEvent } from 'shared-catalog';
+import { EXPLORE_STORE_SELECTED_EVENT } from 'shared-catalog';
 import { TsButtonComponent } from 'ts-design-system';
 import { CheckoutFormFactory } from '../../forms/checkout-form.factory';
 import { OrderService } from '../../services/order.service';
@@ -9,7 +12,7 @@ import { OrderService } from '../../services/order.service';
 @Component({
   selector: 'app-checkout-page',
   standalone: true,
-  imports: [ReactiveFormsModule, RouterLink, TsButtonComponent],
+  imports: [ReactiveFormsModule, RouterLink, TsButtonComponent, NgComponentOutlet],
   template: `
     <h1 class="mb-8 text-2xl font-semibold text-text">Checkout</h1>
 
@@ -33,15 +36,9 @@ import { OrderService } from '../../services/order.service';
         </label>
       </div>
 
-      <label class="block">
-        <span class="text-sm text-text-muted">Store pickup</span>
-        <select formControlName="storeId" class="mt-1 w-full rounded border border-border px-3 py-2">
-          <option value="" disabled>Choose a store</option>
-          @for (store of stores; track store.id) {
-            <option [value]="store.id">{{ store.name }} — {{ store.city }}</option>
-          }
-        </select>
-      </label>
+      @if (storePickerComponent(); as cmp) {
+        <ng-container *ngComponentOutlet="cmp" />
+      }
 
       <div class="flex items-center justify-between">
         <a routerLink="/cart" class="text-sm text-text-muted">Back to cart</a>
@@ -50,15 +47,33 @@ import { OrderService } from '../../services/order.service';
     </form>
   `,
 })
-export class CheckoutPageComponent {
-  @Input({ required: true }) stores!: Store[];
-
+export class CheckoutPageComponent implements OnDestroy {
   private readonly formFactory = inject(CheckoutFormFactory);
   private readonly orderService = inject(OrderService);
   private readonly router = inject(Router);
 
   submitted = false;
   form = this.formFactory.create();
+
+  // El selector de tienda es de Explore; se embebe vía Module Federation y comunica la
+  // selección con un CustomEvent (NgComponentOutlet no permite enlazar un @Output()).
+  protected readonly storePickerComponent = signal<Type<unknown> | null>(null);
+
+  private readonly onStoreSelected = (event: Event) => {
+    const { storeId } = (event as StoreSelectedEvent).detail;
+    this.form.controls.storeId.setValue(storeId);
+  };
+
+  constructor() {
+    loadRemoteModule('mfeExplore', './StorePicker')
+      .then((m) => this.storePickerComponent.set(m.StorePickerComponent))
+      .catch((err) => console.error(err));
+    window.addEventListener(EXPLORE_STORE_SELECTED_EVENT, this.onStoreSelected);
+  }
+
+  ngOnDestroy(): void {
+    window.removeEventListener(EXPLORE_STORE_SELECTED_EVENT, this.onStoreSelected);
+  }
 
   placeOrder(): void {
     if (this.form.invalid) {

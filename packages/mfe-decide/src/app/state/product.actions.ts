@@ -1,6 +1,6 @@
 import { inject, Injectable } from '@angular/core';
 import type { Observable } from 'rxjs';
-import { forkJoin, tap } from 'rxjs';
+import { tap } from 'rxjs';
 import type { ProductDetail } from 'shared-catalog';
 import { InventoryService } from '../services/inventory.service';
 import { ProductService } from '../services/product.service';
@@ -27,11 +27,6 @@ export class ProductActions {
 
   selectVariant(sku: string): Observable<unknown> {
     this.store.setSelectedSku(sku);
-    return forkJoin([
-      this.inventoryService.getStock(sku).pipe(tap((stock) => this.store.setStock(stock))),
-      this.productService
-        .getRecommendations([sku])
-        .pipe(tap((recommendations) => this.store.setRecommendations(recommendations))),
-    ]);
+    return this.inventoryService.getStock(sku).pipe(tap((stock) => this.store.setStock(stock)));
   }
 }

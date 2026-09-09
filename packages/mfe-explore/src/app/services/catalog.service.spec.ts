@@ -48,4 +48,14 @@ describe('CatalogService', () => {
     expect(req.request.method).toBe('GET');
     req.flush([]);
   });
+
+  it('requests recommendations for a csv of skus', () => {
+    service.getRecommendations(['SF-TITAN-COPPER', 'RAPID-BLUE']).subscribe();
+
+    const req = httpMock.expectOne(
+      'http://api.test/api/catalog/recommendations?skus=SF-TITAN-COPPER,RAPID-BLUE'
+    );
+    expect(req.request.method).toBe('GET');
+    req.flush([]);
+  });
 });

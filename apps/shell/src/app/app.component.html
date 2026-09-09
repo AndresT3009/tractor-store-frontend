@@ -1,18 +1,24 @@
 <div class="flex min-h-screen flex-col font-sans text-text">
-  <header class="border-b border-border bg-surface px-6 py-4 shadow-sm">
-    <div class="mx-auto flex max-w-6xl items-center justify-between">
-      <span class="text-lg font-semibold text-primary">{{ title }}</span>
-      <nav class="flex items-center gap-6 text-sm text-text-muted">
-        <ts-button-element data-testid="cart-button">Carrito ({{ cartItemCount() }})</ts-button-element>
-      </nav>
+  @if (headerComponent(); as header) {
+    <ng-container *ngComponentOutlet="header" />
+  }
+
+  <div class="border-b border-border bg-surface px-6 py-2">
+    <div class="mx-auto flex max-w-6xl items-center justify-end gap-4 text-sm text-text-muted">
+      <!-- Demo de Web Components (Fase 4): <ts-button> como Custom Element vainilla, aparte
+           del MiniCart real que compone el estado del carrito. -->
+      <ts-button-element data-testid="cart-button">Carrito</ts-button-element>
+      @if (miniCartComponent(); as miniCart) {
+        <ng-container *ngComponentOutlet="miniCart" />
+      }
     </div>
-  </header>
+  </div>
 
   <main class="mx-auto w-full max-w-6xl flex-1 px-6 py-12">
     <router-outlet></router-outlet>
   </main>
 
-  <footer class="border-t border-border bg-surface-muted px-6 py-8 text-sm text-text-muted">
-    <div class="mx-auto max-w-6xl">The Tractor Store</div>
-  </footer>
+  @if (footerComponent(); as footer) {
+    <ng-container *ngComponentOutlet="footer" />
+  }
 </div>
