@@ -1,0 +1,26 @@
+{
+  "name": "mock-api",
+  "$schema": "../../node_modules/nx/schemas/project-schema.json",
+  "sourceRoot": "packages/mock-api/src",
+  "projectType": "library",
+  "tags": ["scope:mock-api"],
+  "targets": {
+    "build": {
+      "executor": "@nx/js:tsc",
+      "outputs": ["{options.outputPath}"],
+      "options": {
+        "outputPath": "dist/packages/mock-api",
+        "main": "packages/mock-api/src/index.ts",
+        "tsConfig": "packages/mock-api/tsconfig.lib.json",
+        "assets": ["packages/mock-api/*.md"]
+      }
+    },
+    "test": {
+      "executor": "@nx/jest:jest",
+      "outputs": ["{workspaceRoot}/coverage/{projectRoot}"],
+      "options": {
+        "jestConfig": "packages/mock-api/jest.config.ts"
+      }
+    }
+  }
+}

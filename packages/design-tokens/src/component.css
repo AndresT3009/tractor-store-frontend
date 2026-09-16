@@ -1,0 +1,20 @@
+/* Tokens que un componente concreto de ts-design-system expone en su propia API de theming, así
+   un consumidor puede sobrescribir --button-bg sin tocar --color-primary global. */
+:root {
+  --button-bg: var(--color-primary);
+  --button-bg-hover: var(--color-primary-hover);
+  --button-color: var(--color-primary-contrast);
+  --button-radius: var(--radius-md);
+
+  --cart-counter-bg: var(--color-accent);
+  --cart-counter-color: var(--color-accent-contrast);
+
+  --card-bg: var(--color-surface);
+  --card-border: var(--color-border);
+  --card-radius: var(--radius-lg);
+  --card-shadow: var(--shadow-sm);
+
+  --variant-option-border: var(--color-border);
+  --variant-option-border-selected: var(--color-primary);
+  --variant-option-size: 2rem;
+}

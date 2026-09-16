@@ -1,0 +1,9 @@
+node_modules
+dist
+coverage
+tmp
+.nx
+.git
+.github
+storybook-static
+**/*.spec.ts

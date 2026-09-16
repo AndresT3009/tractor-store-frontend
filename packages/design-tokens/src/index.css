@@ -1,0 +1,4 @@
+/* Punto de entrada único: cada app importa solo este archivo, no las tres capas por separado. */
+@import './primitives.css';
+@import './semantic.css';
+@import './component.css';

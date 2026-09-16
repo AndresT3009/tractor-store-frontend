@@ -1,0 +1,21 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <title>mfe-explore — standalone Custom Element demo</title>
+  </head>
+  <body>
+    <!--
+      Página HTML plana, sin Angular ni el shell: prueba que mfe-explore también se puede
+      distribuir como Custom Element independiente de Module Federation (build "custom-element"
+      en project.json). Requiere haber corrido antes:
+        nx run mfe-explore:custom-element
+      y el backend real en localhost:8080 (mfe-explore-widget llama a /api/catalog/home).
+    -->
+    <h1>Consumidor sin Angular</h1>
+    <mfe-explore-widget></mfe-explore-widget>
+
+    <script src="../../dist/packages/mfe-explore-custom-element/browser/polyfills.js" type="module"></script>
+    <script src="../../dist/packages/mfe-explore-custom-element/browser/main.js" type="module"></script>
+  </body>
+</html>

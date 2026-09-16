@@ -1,0 +1,26 @@
+version: 2
+updates:
+  - package-ecosystem: "npm"
+    directory: "/"
+    schedule:
+      interval: "weekly"
+    open-pull-requests-limit: 10
+    groups:
+      angular:
+        patterns:
+          - "@angular/*"
+          - "@angular-devkit/*"
+      nx:
+        patterns:
+          - "@nx/*"
+          - "nx"
+    # native-federation quedó fijado a una versión exacta compatible con esta config de Nx/Angular
+    # (ver federation.config.js de cada app) tras resolver varios problemas de bundling — se
+    # actualiza a mano, revisando el composed run completo, no vía Dependabot.
+    ignore:
+      - dependency-name: "@angular-architects/native-federation"
+
+  - package-ecosystem: "github-actions"
+    directory: "/"
+    schedule:
+      interval: "weekly"

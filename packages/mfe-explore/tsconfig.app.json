@@ -1,0 +1,17 @@
+{
+  "extends": "./tsconfig.json",
+  "compilerOptions": {
+    "outDir": "../../dist/out-tsc",
+    "types": []
+  },
+  "files": [
+    "src/main.ts",
+    "src/custom-element.main.ts",
+    "src/app/components/header/header.component.ts",
+    "src/app/components/footer/footer.component.ts",
+    "src/app/components/recommendations/recommendations.component.ts",
+    "src/app/components/store-picker/store-picker.component.ts"
+  ],
+  "include": ["src/**/*.d.ts"],
+  "exclude": ["jest.config.ts", "src/**/*.test.ts", "src/**/*.spec.ts"]
+}
