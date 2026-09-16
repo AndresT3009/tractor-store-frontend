@@ -41,7 +41,13 @@ Railway permite referenciar el dominio de otro servicio del mismo proyecto con
 | **mfe-explore** | `API_URL=https://<dominio-del-backend>/api` |
 | **mfe-decide** | `API_URL=https://<dominio-del-backend>/api`, `MFE_EXPLORE_URL=https://${{mfe-explore.RAILWAY_PUBLIC_DOMAIN}}`, `MFE_CHECKOUT_URL=https://${{mfe-checkout.RAILWAY_PUBLIC_DOMAIN}}` |
 | **mfe-checkout** | `API_URL=https://<dominio-del-backend>/api`, `MFE_EXPLORE_URL=https://${{mfe-explore.RAILWAY_PUBLIC_DOMAIN}}` |
-| **shell** | `MFE_EXPLORE_URL=https://${{mfe-explore.RAILWAY_PUBLIC_DOMAIN}}`, `MFE_DECIDE_URL=https://${{mfe-decide.RAILWAY_PUBLIC_DOMAIN}}`, `MFE_CHECKOUT_URL=https://${{mfe-checkout.RAILWAY_PUBLIC_DOMAIN}}` |
+| **shell** | `API_URL=https://<dominio-del-backend>/api`, `MFE_EXPLORE_URL=https://${{mfe-explore.RAILWAY_PUBLIC_DOMAIN}}`, `MFE_DECIDE_URL=https://${{mfe-decide.RAILWAY_PUBLIC_DOMAIN}}`, `MFE_CHECKOUT_URL=https://${{mfe-checkout.RAILWAY_PUBLIC_DOMAIN}}` |
+
+`shell` también necesita `API_URL`: cuando compone las rutas de los 3 MFEs vía Module Federation,
+el `bootstrap.ts` propio de cada MFE nunca corre — es el `bootstrap.ts` del shell (el único que
+realmente arranca la aplicación Angular) quien tiene que proveer el token `API_URL` compartido
+(`shared-catalog`) para que las llamadas HTTP de los MFEs, ya compuestos, usen el backend real en
+vez de caer al default de desarrollo local.
 
 `<dominio-del-backend>` es la URL pública del servicio `backend` del repo `tractor-store-backend`
 (puede referenciarse igual con `${{backend.RAILWAY_PUBLIC_DOMAIN}}` si ambos repos viven en el mismo

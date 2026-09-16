@@ -16,9 +16,9 @@ const API_ROOT = 'http://localhost:8080/api';
 let cartState = createCartState();
 let orders = new Map<string, Order>();
 
-// Los tres tokens de API (EXPLORE_API_URL, DECIDE_API_URL, CHECKOUT_API_URL) apuntan por
-// defecto al mismo backend real (http://localhost:8080/api) — estos handlers cubren ese único
-// contrato, no tres APIs separadas por equipo, porque así quedó construido el backend real.
+// El token compartido API_URL (shared-catalog) apunta por defecto al mismo backend real
+// (http://localhost:8080/api) — estos handlers cubren ese único contrato, no tres APIs separadas
+// por equipo, porque así quedó construido el backend real.
 export const handlers = [
   http.get(`${API_ROOT}/catalog/home`, () => HttpResponse.json(mockHome)),
 

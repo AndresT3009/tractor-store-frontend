@@ -1,7 +1,7 @@
 import { HttpTestingController, provideHttpClientTesting } from '@angular/common/http/testing';
 import { provideHttpClient } from '@angular/common/http';
 import { TestBed } from '@angular/core/testing';
-import { CHECKOUT_API_URL } from '../checkout-api-url.token';
+import { API_URL } from 'shared-catalog';
 import { CartService } from './cart.service';
 
 describe('CartService', () => {
@@ -13,7 +13,7 @@ describe('CartService', () => {
       providers: [
         provideHttpClient(),
         provideHttpClientTesting(),
-        { provide: CHECKOUT_API_URL, useValue: 'http://api.test/api' },
+        { provide: API_URL, useValue: 'http://api.test/api' },
       ],
     });
 

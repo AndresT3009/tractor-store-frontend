@@ -1,0 +1,5 @@
+# Los scripts de shell corren dentro de imágenes Docker Linux (deploy/docker-entrypoint.sh); un
+# checkout en Windows con core.autocrlf puede convertirlos a CRLF, y un shebang "#!/bin/sh\r\n"
+# hace que el contenedor falle al arrancar con "exec: no such file or directory" — engañoso,
+# porque el problema real es el \r final, no que falte el archivo.
+*.sh text eol=lf
