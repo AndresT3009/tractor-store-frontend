@@ -5,20 +5,26 @@ updates:
     schedule:
       interval: "weekly"
     open-pull-requests-limit: 10
-    groups:
-      angular:
-        patterns:
-          - "@angular/*"
-          - "@angular-devkit/*"
-      nx:
-        patterns:
-          - "@nx/*"
-          - "nx"
+    # Sin agrupar Angular/Nx: dependabot/fetch-metadata no expone un update-type confiable para PRs
+    # agrupados, y el workflow de auto-merge dejó pasar un bump major de Nx (20→23, incompatible con
+    # Angular 19.2 fijado en este proyecto) sin darse cuenta — cada dependencia por separado sí
+    # reporta su propio update-type, y el auto-merge lo respeta.
+    #
     # native-federation quedó fijado a una versión exacta compatible con esta config de Nx/Angular
     # (ver federation.config.js de cada app) tras resolver varios problemas de bundling — se
-    # actualiza a mano, revisando el composed run completo, no vía Dependabot.
+    # actualiza a mano, revisando el composed run completo, no vía Dependabot. Los majors de
+    # Angular/Nx ni siquiera se proponen: son incompatibles por diseño (Nx 20.8.4 es la última serie
+    # compatible con Angular 19).
     ignore:
       - dependency-name: "@angular-architects/native-federation"
+      - dependency-name: "@angular/*"
+        update-types: ["version-update:semver-major"]
+      - dependency-name: "@angular-devkit/*"
+        update-types: ["version-update:semver-major"]
+      - dependency-name: "@nx/*"
+        update-types: ["version-update:semver-major"]
+      - dependency-name: "nx"
+        update-types: ["version-update:semver-major"]
 
   - package-ecosystem: "github-actions"
     directory: "/"
