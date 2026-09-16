@@ -187,8 +187,8 @@ importers:
         specifier: 9.1.20
         version: 9.1.20(@testing-library/dom@10.4.1)(msw@2.15.0(@types/node@18.16.9)(typescript@5.7.3))(prettier@2.8.8)(supports-color@8.1.1)(vite@6.4.2(@types/node@18.16.9)(jiti@1.21.7)(less@4.2.2)(sass-embedded@1.103.1)(sass@1.103.1)(stylus@0.64.0(supports-color@8.1.1))(terser@5.39.0)(yaml@2.9.0))
       style-loader:
-        specifier: 3.3.4
-        version: 3.3.4(webpack@5.110.2(@swc/core@1.5.29(@swc/helpers@0.5.23))(clean-css@5.3.3)(cssnano@6.1.2(postcss@8.5.26))(csso@5.0.5)(esbuild@0.25.12)(html-minifier-terser@6.1.0)(postcss@8.5.26)(uglify-js@3.19.3))
+        specifier: 4.0.0
+        version: 4.0.0(webpack@5.110.2(@swc/core@1.5.29(@swc/helpers@0.5.23))(clean-css@5.3.3)(cssnano@6.1.2(postcss@8.5.26))(csso@5.0.5)(esbuild@0.25.12)(html-minifier-terser@6.1.0)(postcss@8.5.26)(uglify-js@3.19.3))
       tailwindcss:
         specifier: 3.4.19
         version: 3.4.19(yaml@2.9.0)
@@ -8540,6 +8540,12 @@ packages:
     engines: {node: '>= 12.13.0'}
     peerDependencies:
       webpack: ^5.0.0
+
+  style-loader@4.0.0:
+    resolution: {integrity: sha512-1V4WqhhZZgjVAVJyt7TdDPZoPBPNHbekX4fWnCJL1yQukhCeZhJySUL+gL9y6sNdN95uEOS83Y55SqHcP7MzLA==}
+    engines: {node: '>= 18.12.0'}
+    peerDependencies:
+      webpack: ^5.27.0
 
   stylehacks@6.1.1:
     resolution: {integrity: sha512-gSTTEQ670cJNoaeIp9KX6lZmm8LJ3jPB5yJmX8Zq/wQxOsAFXV3qjWzHas3YYk1qesuVIyYWWUpZ0vSE/dTSGg==}
@@ -19621,6 +19627,10 @@ snapshots:
   style-loader@3.3.4(webpack@5.98.0(@swc/core@1.5.29(@swc/helpers@0.5.23))(clean-css@5.3.3)(cssnano@6.1.2(postcss@8.5.26))(csso@5.0.5)(esbuild@0.28.2)(html-minifier-terser@6.1.0)(postcss@8.5.26)(uglify-js@3.19.3)):
     dependencies:
       webpack: 5.98.0(@swc/core@1.5.29(@swc/helpers@0.5.23))(clean-css@5.3.3)(cssnano@6.1.2(postcss@8.5.26))(csso@5.0.5)(esbuild@0.28.2)(html-minifier-terser@6.1.0)(postcss@8.5.26)(uglify-js@3.19.3)
+
+  style-loader@4.0.0(webpack@5.110.2(@swc/core@1.5.29(@swc/helpers@0.5.23))(clean-css@5.3.3)(cssnano@6.1.2(postcss@8.5.26))(csso@5.0.5)(esbuild@0.25.12)(html-minifier-terser@6.1.0)(postcss@8.5.26)(uglify-js@3.19.3)):
+    dependencies:
+      webpack: 5.110.2(@swc/core@1.5.29(@swc/helpers@0.5.23))(clean-css@5.3.3)(cssnano@6.1.2(postcss@8.5.26))(csso@5.0.5)(esbuild@0.25.12)(html-minifier-terser@6.1.0)(postcss@8.5.26)(uglify-js@3.19.3)
 
   stylehacks@6.1.1(postcss@8.5.26):
     dependencies:
