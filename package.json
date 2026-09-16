@@ -47,7 +47,7 @@
     "@nx/storybook": "20.8.4",
     "@nx/web": "20.8.4",
     "@nx/workspace": "20.8.4",
-    "@playwright/test": "^1.36.0",
+    "@playwright/test": "^1.63.0",
     "@schematics/angular": "~19.2.0",
     "@storybook/angular": "9.1.20",
     "@storybook/test-runner": "0.23.0",
