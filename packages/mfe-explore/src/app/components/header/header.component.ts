@@ -18,7 +18,7 @@ type Theme = 'light' | 'dark';
     <header class="border-b border-border bg-surface px-6 py-4 shadow-sm">
       <div class="mx-auto flex max-w-6xl items-center justify-between">
         <a routerLink="/" class="flex items-center gap-2">
-          <img src="/images/logo.png" alt="The Tractor Store" class="h-9 w-auto" />
+          <img src="/images/logo.png" alt="The Tractor Store" class="h-14 w-auto" />
         </a>
         <nav class="flex items-center gap-6 text-sm text-text-muted">
           <a routerLink="/">Explorar</a>
