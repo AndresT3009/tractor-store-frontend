@@ -20,3 +20,27 @@
   --color-danger: var(--color-red-500);
   --color-danger-hover: var(--color-red-700);
 }
+
+/* Modo oscuro: mismo nombre de token, mismo consumidor (Tailwind, ts-design-system) — solo cambia
+   a qué primitivo apunta cada uno, invirtiendo la escala de neutros. Se activa con
+   [data-theme='dark'] en <html> (ver ThemeToggle en el header), no con prefers-color-scheme:
+   es una preferencia explícita del usuario dentro de la tienda, no del sistema operativo. */
+:root[data-theme='dark'] {
+  --color-primary: var(--color-green-500);
+  --color-primary-hover: var(--color-green-300);
+  --color-primary-contrast: var(--color-neutral-900);
+
+  --color-accent: var(--color-amber-300);
+  --color-accent-contrast: var(--color-neutral-900);
+
+  --color-surface: var(--color-neutral-900);
+  --color-surface-muted: #2c2a26;
+  --color-background: #171613;
+
+  --color-text: var(--color-neutral-50);
+  --color-text-muted: var(--color-neutral-300);
+  --color-border: var(--color-neutral-700);
+
+  --color-danger: var(--color-red-500);
+  --color-danger-hover: var(--color-red-700);
+}

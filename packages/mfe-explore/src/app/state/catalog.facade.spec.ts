@@ -10,7 +10,9 @@ describe('CatalogFacade', () => {
 
   const home: HomeData = { categories: [] };
   const category: CategoryData = { products: [], availableFilters: ['all', 'classic'] };
-  const stores: Store[] = [{ id: 's1', name: 'Store', addressLine: 'A', city: 'B' }];
+  const stores: Store[] = [
+    { id: 's1', name: 'Store', addressLine: 'A', city: 'B', imageUrl: '/images/stores/s1.jpg' },
+  ];
 
   beforeEach(() => {
     catalogService = {

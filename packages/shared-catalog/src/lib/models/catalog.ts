@@ -53,4 +53,5 @@ export interface Store {
   name: string;
   addressLine: string;
   city: string;
+  imageUrl: string;
 }

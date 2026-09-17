@@ -16,6 +16,13 @@ describe('HeaderComponent', () => {
     fixture.detectChanges();
   });
 
+  afterEach(() => {
+    // El tema se aplica a document.documentElement (compartido por toda la página, no solo por
+    // este fixture) — sin limpiarlo, un test que deja data-theme="dark" se filtraría al resto.
+    document.documentElement.removeAttribute('data-theme');
+    localStorage.clear();
+  });
+
   it('shows no error banner by default', () => {
     expect(fixture.nativeElement.querySelector('[data-testid="http-error-banner"]')).toBeNull();
   });
@@ -40,9 +47,28 @@ describe('HeaderComponent', () => {
     );
     fixture.detectChanges();
 
-    (fixture.nativeElement.querySelector('button') as HTMLButtonElement).click();
+    (
+      fixture.nativeElement.querySelector(
+        '[data-testid="http-error-banner"] button'
+      ) as HTMLButtonElement
+    ).click();
     fixture.detectChanges();
 
     expect(fixture.nativeElement.querySelector('[data-testid="http-error-banner"]')).toBeNull();
+  });
+
+  it('toggles data-theme on the document and persists it', () => {
+    const toggle = fixture.nativeElement.querySelector(
+      '[data-testid="theme-toggle"]'
+    ) as HTMLButtonElement;
+
+    toggle.click();
+    fixture.detectChanges();
+    expect(document.documentElement.getAttribute('data-theme')).toBe('dark');
+    expect(localStorage.getItem('tractor-store:theme')).toBe('dark');
+
+    toggle.click();
+    fixture.detectChanges();
+    expect(document.documentElement.getAttribute('data-theme')).toBe('light');
   });
 });

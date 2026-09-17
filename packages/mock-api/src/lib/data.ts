@@ -70,8 +70,20 @@ export function mockCategory(filter: string): CategoryData {
 }
 
 export const mockStores: Store[] = [
-  { id: 'store-denver', name: 'Denver Yard', addressLine: '100 Prairie Ave', city: 'Denver' },
-  { id: 'store-austin', name: 'Austin Depot', addressLine: '55 Ranch Rd', city: 'Austin' },
+  {
+    id: 'store-denver',
+    name: 'Denver Yard',
+    addressLine: '100 Prairie Ave',
+    city: 'Denver',
+    imageUrl: '/images/stores/aurora-flagship.jpg',
+  },
+  {
+    id: 'store-austin',
+    name: 'Austin Depot',
+    addressLine: '55 Ranch Rd',
+    city: 'Austin',
+    imageUrl: '/images/stores/big-micro-machines.jpg',
+  },
 ];
 
 export function mockRecommendations(skus: string[]): Recommendation[] {

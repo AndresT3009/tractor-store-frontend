@@ -10,7 +10,13 @@ describe('StorePickerComponent', () => {
   let catalogService: jest.Mocked<CatalogService>;
 
   const stores: Store[] = [
-    { id: 'store-1', name: 'Denver Yard', addressLine: '1 Main St', city: 'Denver' },
+    {
+      id: 'store-1',
+      name: 'Denver Yard',
+      addressLine: '1 Main St',
+      city: 'Denver',
+      imageUrl: '/images/stores/denver.jpg',
+    },
   ];
 
   beforeEach(async () => {

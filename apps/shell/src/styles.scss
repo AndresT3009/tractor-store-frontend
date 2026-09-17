@@ -2,11 +2,6 @@
 @tailwind components;
 @tailwind utilities;
 
+// El estilo de body (fondo, tipografía) vive en design-tokens/src/base.css, compartido por las 4
+// apps en vez de duplicado aquí.
 @import '../../../packages/design-tokens/src/index.css';
-
-body {
-  margin: 0;
-  font-family: var(--font-family-base);
-  color: var(--color-text);
-  background: var(--color-background);
-}

@@ -1,0 +1,23 @@
+/* Estilos base compartidos por las 4 apps (antes duplicados en cada styles.scss). El degradado
+   es deliberadamente sutil: da algo de vida al fondo sin competir con las tarjetas (bg-surface)
+   que llevan el contenido real encima. */
+body {
+  margin: 0;
+  font-family: var(--font-family-base);
+  color: var(--color-text);
+  background: linear-gradient(
+    160deg,
+    var(--color-background) 0%,
+    var(--color-green-50) 45%,
+    var(--color-amber-100) 100%
+  );
+  background-attachment: fixed;
+  min-height: 100vh;
+  transition:
+    background-color 0.2s ease,
+    color 0.2s ease;
+}
+
+:root[data-theme='dark'] body {
+  background: linear-gradient(160deg, var(--color-background) 0%, #1d2419 45%, #241c12 100%);
+}
