@@ -59,7 +59,7 @@
     "@typescript-eslint/utils": "^8.70.1",
     "angular-eslint": "^19.2.0",
     "autoprefixer": "^10.6.1",
-    "chromatic": "^11.29.0",
+    "chromatic": "^18.9.5",
     "css-loader": "7.1.2",
     "eslint": "^9.8.0",
     "eslint-config-prettier": "^10.0.0",
